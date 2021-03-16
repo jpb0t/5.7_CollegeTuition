@@ -10,10 +10,10 @@ public class Main {
 	//Variables:
         int userTuitionInput, userInflationRateInput, userNumOfYearsInflation,
                 userYearsAfterInflation = 0;
-        int controlVar1, controlVar2 = 0;
-        double sumFirstLoop, sumSecondLoop = 0;
+        int controlVar1 = 0;
+        int controlVar2 = 0;
+        double sumFirstLoop, sumSecondLoop = 0.0;
         double totalTuitionSecondLoop = 0.0;
-        double sumTotalForAttendance = 0.0;
         double convertInflationToPercentage = 0.0;
 
     //Block 1: UI
@@ -37,23 +37,22 @@ public class Main {
 
         for (controlVar1 = 0; controlVar1 < userNumOfYearsInflation; controlVar1++) {
             sumFirstLoop = (sumFirstLoop * convertInflationToPercentage) + sumFirstLoop;
-            sumSecondLoop = sumFirstLoop;
-            if (controlVar1 < userNumOfYearsInflation) {
-                for (controlVar2 = 0; controlVar2 < userYearsAfterInflation; controlVar2++) {
-                    totalTuitionSecondLoop = sumSecondLoop;
-                    sumSecondLoop = (sumSecondLoop * convertInflationToPercentage) + sumSecondLoop;
-                    //Bottom code took me a looooooooooong time to figure out. And for no reason.
-                    sumTotalForAttendance = totalTuitionSecondLoop + sumSecondLoop;
-                }
-            }
+            totalTuitionSecondLoop = sumFirstLoop;
         }
+        for (controlVar2 = 0; controlVar2 < userYearsAfterInflation; controlVar2++) {
+            totalTuitionSecondLoop = (totalTuitionSecondLoop * convertInflationToPercentage) +
+                    totalTuitionSecondLoop;
+            sumSecondLoop = totalTuitionSecondLoop + sumSecondLoop;
+        }
+
         System.out.printf("Yearly tuition in %d years will be $%.2f. Total tuition for %d years " +
                         "after will be $%.2f.", userNumOfYearsInflation, sumFirstLoop,
-                        userYearsAfterInflation, sumTotalForAttendance);
+                        userYearsAfterInflation, sumSecondLoop);
 
     }
 }
 
 /*
-IDK why it took me so long to finish it, but it did, lol. I'm eager to see what your solution is.
+I really couldn't figure out how to add in the second For loop. I think it was the logic behind
+setting a variable to take on the new value.
 */
